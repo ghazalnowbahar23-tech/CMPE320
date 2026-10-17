@@ -8,7 +8,8 @@ currentCardIndex(0),
 score(0),
 correct(0),
 incorrect(0),
-characterStep(0)
+characterStep(0),
+currentStreak(0)
 {
 }
 // return the current flashcard or a null pointer if the game is finished
