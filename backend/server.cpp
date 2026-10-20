@@ -7,7 +7,63 @@ using namespace std;
 
 int main() {
     crow::SimpleApp app;
+    
+        // Show the flashcard page
+    CROW_ROUTE(app, "/play")
+    ([]() {
+        crow::response response;
+        response.set_static_file_info_unsafe("../html design/<FlashCardQ>.html");
+        return response;
+    });
 
+    // Load the JavaScript
+    CROW_ROUTE(app, "/gameplay.js")
+    ([]() {
+        crow::response response;
+        response.set_static_file_info_unsafe("../html design/gameplay.js");
+        return response;
+    });
+
+    // Load the flashcard GIF
+    CROW_ROUTE(app, "/card_flip.gif")
+    ([]() {
+        crow::response response;
+        response.set_static_file_info_unsafe("../html design/card_flip.gif");
+        return response;
+    });
+
+    // Load the shared CSS
+    CROW_ROUTE(app, "/css/global.css")
+    ([]() {
+        crow::response response;
+        response.set_static_file_info_unsafe("../css/global.css");
+        return response;
+    });
+
+    // Load the flashcard CSS
+    CROW_ROUTE(app, "/css/flashcard.css")
+    ([]() {
+        crow::response response;
+        response.set_static_file_info_unsafe("../css/flashcard.css");
+        return response;
+    });
+    
+    // Show the menu page
+	CROW_ROUTE(app, "/menu")
+	([]() {
+ 	  crow::response response;
+  	  response.set_static_file_info_unsafe("../html design/<Menu>.html");
+  	  return response;
+	});
+	
+	// Load the character image
+	CROW_ROUTE(app, "/cs320_character.gif")
+	([]() {
+   	 crow::response response;
+   	 response.set_static_file_info_unsafe("../html design/cs320_character.gif");
+   	 return response;
+	});
+    
     // Temporary flashcards for testing the server.
     vector<Flashcard> deck = {
         {1, "What is 2 + 2?", {"4"}},
