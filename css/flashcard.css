@@ -73,3 +73,27 @@ a[href="next.html"] {
     text-decoration:none;
     border-radius: 8px;
 }
+
+
+#climbArea {
+    position: relative;
+    height: 250px;
+    width: 200px;
+    margin: 20px auto;
+    border-bottom: 3px solid #333;
+    overflow: hidden;
+}
+
+#character {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    width: 80px;
+    transition: transform 0.4s ease;
+}
+
+
+
+
+
+

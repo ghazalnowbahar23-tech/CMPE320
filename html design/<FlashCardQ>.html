@@ -1,63 +1,92 @@
 <html>
 <head>
-	<title>QCard Climb/Fight Official Website</title>
-	<link rel="stylesheet" href="../css/global.css">
+    <title>QCard Climb/Fight Official Website</title>
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/flashcard.css">
+
+    <!-- Load the gameplay code after the HTML -->
+    <script src="gameplay.js" defer></script>
 </head>
 
 <body>
-		
-		<font face="Verdana, Sans Serif">
+    <font face="Verdana, Sans Serif">
 
+        <h1 color="brown" pixel="12" align="center">
+            QCard Climb/Fight Official Website
+        </h1>
 
-<h1 color="brown" pixel="12" align="center">QCard Climb/Fight Official Website</h1>
+        <br>
 
-<br>
-<h2 color="brown" pixel="14" align="center" style="margin-bottom: 2px;">SAMPLE QUESTION: WHAT THE COLOR OF THE SKY</h2>
-<div align="center">
-    <img src="card_flip.gif" width="400">
-</div>
+        <h2 id="question" color="brown" pixel="14"
+            align="center" style="margin-bottom: 2px;">
+            Loading question...
+        </h2>
 
+        <div align="center">
+            <img src="card_flip.gif" width="400">
+        </div>  
+        <div id="climbArea">
+             <img id="character" src="cs320_character.gif" alt="Player character">
+        </div>
 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+        <div align="center">
+            <p id="status">Loading question...</p>
 
-<div align="center">
-    <a color="orange"><b>(hint: something)</b></a>
-    <br>
-	<br>
-	<br>
-	<br>
-    <input type="text" id="cardAnswer"
-               placeholder="Type your answer here"
-               style="width: 400px; text-align: center;">
+            <br>
+            <br>
+            <br>
+            <br>
 
-    </div>
-	</div>
+            <!-- Submit the answer without leaving the page -->
+            <form id="answerForm">
+                <input type="text" id="cardAnswer"
+                       placeholder="Type your answer here"
+                       style="width: 400px; text-align: center;"
+                       disabled>
 
-	
+                <br>
+                <br>
 
-</font>
-<body>
-	<h3 color="brown" pixel="10" align="center">Card </h3>
-</body>
+                <button type="submit" id="submitAnswer" disabled>
+                    Submit
+                </button>
+            </form>
 
+            <!-- Show feedback and allow another loading attempt -->
+            <p id="feedback"></p>
 
-<!-- BACK TO MENU -->
-    <a href="<Menu>.html"
+            <button type="button" id="retryQuestion" hidden>
+                Retry loading question
+            </button>
+
+            <!-- Display the statistics returned by C++ -->
+            <p>Score: <span id="score">0</span></p>
+            <p>Correct: <span id="correctCount">0</span></p>
+            <p>Incorrect: <span id="incorrectCount">0</span></p>
+            <p>Streak: <span id="streak">0</span></p>
+            <p>Character step: <span id="characterStep">0</span></p>
+        </div>
+
+        <h3 color="brown" pixel="10" align="center">Card</h3>
+
+    </font>
+
+    <!-- BACK TO MENU -->
+    <a href="/menu"
        style="position: fixed; bottom: 50px; left: 10px;">
-       Back to menu
+        Back to menu
     </a>
 
-<!--TO NEXT CARD-->
-	<a href="next.html"
-   		style="position: fixed; bottom: 50px; right: 10px;">
-   		To next card
-	</a>
-
-	</html>
-
+    <!-- Load the next question on this page -->
+    <button type="button" id="nextQuestion" hidden
+            style="position: fixed; bottom: 50px; right: 10px;">
+        Next question
+    </button>
+</body>
+</html>
