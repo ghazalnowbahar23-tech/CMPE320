@@ -1,0 +1,23 @@
+h1 {
+    color: #4a90d9;
+    letter-spacing: 4px;
+    padding: 30px 0;
+}
+
+div {
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 2em;
+    font-size: 1.05em;
+    color: #333;
+}
+
+a[href] {
+    color: #4a90d9;
+    text-decoration: none;
+    font-size: 0.95em;
+}
+
+a[href]:hover {
+    text-decoration: underline;
+}
