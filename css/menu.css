@@ -65,7 +65,7 @@ img {
 .menu-buttons {
     position: absolute;
     left: 15%;
-    top: 170px;
+    top: 95px;
     width: 250px;
     text-align: center;
 }
@@ -95,4 +95,9 @@ details summary {
     display: block;
     margin: 10px 0;
     color: #4a90d9;
+}
+
+.menu-buttons h1 {
+    text-align: left;
+    width: 400px;
 }

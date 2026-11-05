@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Import Cards</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body>
+    <h1>QCard Climb/Fight</h1>
+
+    <div align="center">
+        <h2>Import Flashcards</h2>
+        <br>
+
+        <p>Select a flashcard file to import.</p>
+        <br>
+
+        <input type="file" id="importFile" accept=".csv,.json">
+
+        <br><br>
+
+        <button type="button" onclick="importCard()">
+            Import
+        </button>
+
+        <p id="message"></p>
+    </div>
+
+     <!-- BACK TO MENU -->
+    <a href="<Menu>.html"
+       style="position: fixed; bottom: 50px; left: 10px;">
+       Back to menu
+    </a>
+
+    <script>
+        function importCard() {
+            const file = document.getElementById("importFile").files[0];
+
+            if (!file) {
+                document.getElementById("message").textContent =
+                    "Please select a file first.";
+                return;
+            }
+
+            document.getElementById("message").textContent =
+                "Selected for import: " + file.name;
+        }
+    </script>
+</body>
+</html>

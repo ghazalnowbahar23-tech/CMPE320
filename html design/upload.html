@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Upload Cards</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body>
+    <h1>QCard Climb/Fight</h1>
+
+    <div align="center">
+        <h2>Upload Flashcards</h2>
+
+        <br>
+
+        <p>Select a file from your computer.</p>
+        <br>
+
+        <input type="file" id="uploadFile">
+
+        <br><br>
+
+        <button type="button" onclick="uploadCard()">
+            Upload
+        </button>
+
+        <p id="message"></p>
+    </div>
+
+    <!-- BACK TO MENU -->
+    <a href="<Menu>.html"
+       style="position: fixed; bottom: 50px; left: 10px;">
+       Back to menu
+    </a>
+
+    <!-- not sure if put here work can delete and put in javascript?> -->
+    <script>
+        function uploadCard() {
+            const file = document.getElementById("uploadFile").files[0];
+
+            if (!file) {
+                document.getElementById("message").textContent =
+                    "Please select a file first.";
+                return;
+            }
+
+            document.getElementById("message").textContent =
+                "Selected: " + file.name;
+        }
+    </script>
+</body>
+</html>
