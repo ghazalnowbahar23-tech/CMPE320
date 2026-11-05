@@ -61,3 +61,38 @@ img {
     top: 150px;
     width: 350px;
 }
+
+.menu-buttons {
+    position: absolute;
+    left: 15%;
+    top: 170px;
+    width: 250px;
+    text-align: center;
+}
+
+
+.menu-button {
+    display: block;
+    padding: 15px 20px;
+    margin: 20px auto;
+    background-color: #4a90d9;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background-color: #357abd;
+}
+
+details summary {
+    list-style: none;
+}
+
+.options-links a {
+    display: block;
+    margin: 10px 0;
+    color: #4a90d9;
+}
