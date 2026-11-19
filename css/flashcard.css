@@ -1,9 +1,17 @@
 /* flashcard question page */
 
 body {
-    background-color: #f5f5f5;
+    background: linear-gradient(
+        to bottom,
+        #b8e4ff 0%,
+        #e0f4ff 77%,
+        #90c47a 77%,
+        #90c47a 100%
+    );
     font-family: 'Verdana', sans-serif;
-    min-height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
 }
 
 h1 {
@@ -72,4 +80,372 @@ a[href="next.html"] {
     color: white;
     text-decoration:none;
     border-radius: 8px;
+}
+
+/* Fixed staircase */
+.stair {
+    position: absolute;
+    width: 90px;
+    height: 42px;
+    background-color: #fff8ec;
+    border: 3px solid #8c8374;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Five steps: spread across the screen, with a gentler upward climb. */
+#step1 { left: 16%; bottom: 16px; }
+#step2 { left: 32%; bottom: 40px; }
+#step3 { left: 48%; bottom: 64px; }
+#step4 { left: 64%; bottom: 88px; }
+#step5 { left: 80%; bottom: 112px; }
+
+#character {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 205px; /* Larger, without stretching the person sideways */
+    max-width: none;
+    display: block;
+    margin: 0;
+    border-radius: 0;
+    z-index: 8;
+    pointer-events: none;
+    transform: translate(0px, 0px);
+}
+
+/* Stage information box - top right */
+#stageBox {
+    position: absolute;
+    top: 60px;
+    right: 3%;
+    width: 23%;
+    height: 205px;
+
+    background-color: #fff5e6;
+    border: 2px solid #b6a68c;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#stageBox h2 {
+    padding: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+#stageNumber {
+    font-size: 42px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Question box - top left */
+#question {
+    position: absolute;
+    top: 60px;
+    left: 3%;
+    width: 70%;
+    height: 65px;
+
+    background-color: #fffaf2;
+    border: 2px solid #b6a68c;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    margin: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+/* Answer input box */
+#cardAnswer {
+    position: absolute;
+    top: 140px;
+    left: 3%;
+    width: 70% !important;
+    height: 55px;
+
+    background-color: #ffffff;
+    border: 2px solid #b6a68c;
+    border-radius: 15px;
+
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+
+/* Submit button - third box */
+#submitAnswer {
+    position: absolute;
+    top: 210px;
+    left: 3%;
+    width: 70%;
+    height: 55px;
+
+    background-color: #c7e6b6;
+    color: #315a27;
+    border: none;
+    border-radius: 15px;
+
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0;
+}
+
+#submitAnswer:hover {
+    background-color: #add99b;
+}
+
+#submitAnswer:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Staircase container */
+#climbArea {
+    position: absolute;
+    /* The character starts by the left edge, feet on the grass. */
+    top: max(365px, calc(70dvh - 165px));
+    left: 20px;
+    transform: none;
+    transform-origin: top left;
+    width: calc(100% - 40px);
+    height: 230px;
+    margin: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Character Step - top center */
+#characterStepDisplay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #fff5e6;
+    padding: 8px 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    z-index: 20;
+}
+
+/* Game statistics below the staircase */
+#gameStats {
+    position: fixed;
+    bottom: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+
+    background-color: #fff5e6;
+    padding: 10px;
+    border-radius: 12px;
+    z-index: 5;
+}
+
+#gameStats p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+
+/* Back to Menu button */
+a[href="/menu"] {
+    position: fixed;
+    bottom: 20px;
+    left: 3%;
+
+    background-color: #fff5e6;
+    color: #333;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    z-index: 20;
+}
+
+/* Next Question button */
+#nextQuestion {
+    position: fixed;
+    bottom: 20px;
+    right: 3%;
+
+    background-color: #fff5e6;
+    color: #333;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    z-index: 20;
+}
+
+a[href="/menu"]:hover,
+#nextQuestion:hover {
+    background-color: #e8ddc9;
+}
+
+/* Score at bottom center */
+#scoreDisplay {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #fff5e6;
+    color: #333;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    z-index: 20;
+}
+
+/* Keep all five steps visible on narrow displays. */
+@media (max-width: 750px) {
+    #climbArea {
+        left: 10px;
+        width: 850px;
+        transform: scale(0.7);
+    }
+}
+@media (max-width: 480px) {
+    #climbArea { transform: scale(0.43); }
+}
+@media (max-height: 720px) and (min-width: 751px) {
+    #climbArea { transform: scale(0.8); }
+}
+@media (max-height: 620px) {
+    #question { top: 50px; height: 48px; font-size: 18px; }
+    #cardAnswer { top: 110px; height: 45px; }
+    #submitAnswer { top: 165px; height: 45px; }
+    #stageBox { top: 50px; height: 160px; }
+    #climbArea { top: 260px; }
+    #status { top: 235px; }
+    #feedback { top: 270px; }
+    #gameStats { bottom: 64px; }
+}
+@media (max-height: 620px) and (min-width: 751px) {
+    #climbArea { transform: scale(0.58); }
+}
+
+/* Retry Question button */
+#retryQuestion {
+    position: fixed;
+    bottom: 145px;
+    right: 3%;
+
+    background-color: #fff5e6;
+    color: #333;
+    padding: 10px 15px;
+    border: 2px solid #b6a68c;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+#retryQuestion:hover {
+    background-color: #e8ddc9;
+}
+
+/* Keep statistics compact on smaller screens */
+@media (max-width: 900px) {
+    #gameStats {
+        width: 94%;
+        gap: 10px;
+        padding: 8px;
+        flex-wrap: nowrap;
+    }
+
+    #gameStats p {
+        font-size: 11px;
+        white-space: nowrap;
+    }
+}
+
+
+/* Resize further for phone-sized screens */
+@media (max-width: 480px) {
+    #climbArea {
+        transform: scale(0.43);
+    }
+}
+
+/* Question loading status */
+#status {
+    position: absolute;
+    top: 280px;
+    right: 3%;
+    width: 23%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+/* Correct / Incorrect feedback */
+#feedback {
+    position: absolute;
+    top: 320px;
+    right: 3%;
+    width: 23%;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+#feedback[data-state="correct"] {
+    color: #267339;
+}
+
+#feedback[data-state="incorrect"],
+#feedback[data-state="error"] {
+    color: #b53b35;
+}
+
+/* Ensure the controls remain readable above the climbing scene. */
+#climbArea, #stageBox, #gameStats, #characterStepDisplay, #scoreDisplay { margin: 0; }
+#submitAnswer { z-index: 15; }
+#question { z-index: 15; overflow-wrap: anywhere; overflow-y: auto; line-height: 1.2; }
+#cardAnswer { z-index: 15; box-sizing: border-box; }
+#stageBox { z-index: 15; }
+#gameStats { z-index: 20; }
+#status, #feedback { z-index: 22; }
+@media (max-width: 600px) {
+    #question, #cardAnswer, #submitAnswer { width: 63% !important; }
+    #stageBox { width: 29%; }
+    #status, #feedback { width: 29%; font-size: 11px; }
+    #characterStepDisplay { font-size: 13px; }
+    #scoreDisplay { font-size: 12px; padding: 8px; }
+    a[href="/menu"], #nextQuestion { font-size: 12px; padding: 8px; }
+    #gameStats { gap: 6px; }
+    #gameStats p { font-size: 9px; }
 }

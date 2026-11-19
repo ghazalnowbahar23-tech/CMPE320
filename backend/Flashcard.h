@@ -4,12 +4,10 @@
 #include <string>
 #include<vector>
 
-using namespace std;
-
 struct Flashcard{
     int id;
-    string question;
-    vector<string> acceptedAnswers;
+    std::string question;
+    std::vector<std::string> acceptedAnswers;
 };
 
 #endif

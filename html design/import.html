@@ -1,49 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Import Cards</title>
-    <link rel="stylesheet" href="../css/global.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Import Cards</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <style>
+    body {background:#90c47a;text-align:center;padding:32px 12px;}
+    main {max-width:620px;margin:20px auto;padding:26px;background:#fff5e6;border-radius:16px;}
+    input,button {margin:16px 0;max-width:100%;}
+    #message {min-height:25px;overflow-wrap:anywhere;}
+    .back {position:fixed;bottom:24px;left:20px;background:#fff5e6;border-radius:10px;padding:12px 16px;color:#333;text-decoration:none;}
+    .hint {font-size:13px;line-height:1.6;margin-top:10px;}
+  </style>
 </head>
-
 <body>
-    <h1>QCard Climb/Fight</h1>
-
-    <div align="center">
-        <h2>Import Flashcards</h2>
-        <br>
-
-        <p>Select a flashcard file to import.</p>
-        <br>
-
-        <input type="file" id="importFile" accept=".csv,.json">
-
-        <br><br>
-
-        <button type="button" onclick="importCard()">
-            Import
-        </button>
-
-        <p id="message"></p>
-    </div>
-
-     <!-- BACK TO MENU -->
-    <a href="<Menu>.html"
-       style="position: fixed; bottom: 50px; left: 10px;">
-       Back to menu
-    </a>
-
-    <script>
-        function importCard() {
-            const file = document.getElementById("importFile").files[0];
-
-            if (!file) {
-                document.getElementById("message").textContent =
-                    "Please select a file first.";
-                return;
-            }
-
-            document.getElementById("message").textContent =
-                "Selected for import: " + file.name;
-        }
-    </script>
+  <h1>Q-CARD CLIMB</h1>
+  <main>
+    <h2>Import Flashcards</h2>
+    <p>Select a CSV or JSON file to add questions to your account.</p>
+    <input type="file" id="importFile" accept=".csv,.json,text/csv,application/json">
+    <div><button type="button" id="importButton">Import</button></div>
+    <p id="message" role="status" aria-live="polite"></p>
+    <p class="hint">CSV: header <code>question,answer</code> (one card per row). JSON: array of objects with <code>question</code> and <code>answer</code> or <code>acceptedAnswers</code>. Imported cards appear when you start Play again.</p>
+  </main>
+  <a class="back" href="/menu">Back to menu</a>
+  <script src="/import.js" defer></script>
 </body>
 </html>

@@ -5,15 +5,13 @@
 #include "Flashcard.h"
 #include <string>
 
-using namespace std;
-
 class AnswerChecker {
 public:
-    bool isCorrect(const string& userAnswer,
+    bool isCorrect(const std::string& userAnswer,
     const Flashcard& card) const;
 
 private:
-    string normalize(const string& answer) const;
+    std::string normalize(const std::string& answer) const;
 };
 
 #endif

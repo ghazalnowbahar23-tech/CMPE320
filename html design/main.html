@@ -7,6 +7,15 @@
 </head>
 
 <body>
+    <!-- Five decorative grass tufts, anchored in place with swaying blades -->
+    <div class="windy-grass" aria-hidden="true">
+      <span class="tuft" style="--x:7%;--base:10%;--h:37px;--speed:2.9s;--delay:-0.7s"><i></i></span>
+      <span class="tuft" style="--x:26%;--base:36%;--h:31px;--speed:3.8s;--delay:-1.4s"><i></i></span>
+      <span class="tuft" style="--x:47%;--base:13%;--h:45px;--speed:3.2s;--delay:-2.0s"><i></i></span>
+      <span class="tuft" style="--x:69%;--base:48%;--h:28px;--speed:4.1s;--delay:-0.3s"><i></i></span>
+      <span class="tuft" style="--x:89%;--base:21%;--h:39px;--speed:3.5s;--delay:-2.6s"><i></i></span>
+    </div>
+
     <font face="Verdana, Sans Serif">
 
     <!-- PAGE TITLE -->
@@ -43,13 +52,88 @@
         </button>
     </div>
 
+    <!-- LOGIN BUTTON AND ACCOUNT MESSAGES -->
+    <div align="center">
+         <button type="button" id="loginButton">
+            Log In
+        </button>
+        <p id="accountFeedback"></p>
+    </div>
+
     </font>
 
     <script>
-        // JAVASCRIPT 
-        //It need to lead user login and create account if dont have one
-        //when they login they get into <Menu>.html page
+        // Find the inputs, buttons, and feedback message
+        const accttInpt = document.getElementById("account");
+        const pswrdInpt = document.getElementById("password");
+        const crteBtn = document.getElementById("createAccount");
+        const lgnBtn = document.getElementById("loginButton");
+        const acctFdb = document.getElementById("accountFeedback");
+    
+        // Create an account or log in
+        async function accountRequest(action) {
+            const usrn = accttInpt.value.trim();
+            const pswrd = pswrdInpt.value;
+    
+            // Stop if either input is empty
+            if (usrn === "" || pswrd === "") {
+                acctFdb.textContent = "Please enter your account and password.";
+                return;
+            }
+    
+            // Prevent extra clicks while waiting
+            crteBtn.disabled = true;
+            lgnBtn.disabled = true;
+            acctFdb.textContent = "Please wait...";
+    
+            try {
+                // Send the account details to C++
+                const rspn = await fetch("/api/" + action, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username: usrn,
+                        password: pswrd
+                    })
+                });
+    
+                // Show the server's error message
+                if (!rspn.ok) {
+                    acctFdb.textContent = await rspn.text();
+                    return;
+                }
+    
+                if (action === "signup") {
+                    acctFdb.textContent = "Account created! Click Log In.";
+                } else {
+                    const result = await rspn.json();
+    
+                    // Remember the login token for this tab
+                    sessionStorage.setItem("token", result.token);
+    
+                    // Clear the password and open the menu
+                    pswrdInpt.value = "";
+                    window.location.href = "/menu";
+                }
+            } catch (error) {
+                acctFdb.textContent = "Could not connect to the server.";
+            } finally {
+                // Allow the buttons to be clicked again
+                crteBtn.disabled = false;
+                lgnBtn.disabled = false;
+            }
+        }
+    
+        // Send a signup request
+        crteBtn.addEventListener("click", () => {
+            accountRequest("signup");
+        });
+    
+        // Send a login request
+        lgnBtn.addEventListener("click", () => {
+            accountRequest("login");
+        });
     </script>
-
+    
 </body>
 </html>
